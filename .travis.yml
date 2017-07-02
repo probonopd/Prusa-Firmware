@@ -17,6 +17,7 @@ before_install:
   - cp stk500boot_v2_mega2560.hex arduino-1.6.8/hardware/arduino/avr/bootloaders/stk500v2/
   - cp stk500boot_v2_mega2560.hex arduino-1.6.8/hardware/marlin/avr/bootloaders/
   - find arduino-1.6.8/ -name platform.local.txt -delete
+  - sed -i -e 's|SERIAL_PORT 0|SERIAL_PORT 2|g' Firmware/Configuration.h # Use Serial2 instead of Serial0 (connector P3 instead of USB)
   
 install:
   - cp Firmware/variants/1_75mm_MK2-RAMBo13a-E3Dv6full.h Firmware/Configuration_prusa.h
