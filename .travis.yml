@@ -12,16 +12,14 @@ before_install:
   - wget http://downloads.arduino.cc/arduino-1.6.8-linux64.tar.xz
   - tar xf arduino-1.6.8-linux64.tar.xz
   - rm -rf arduino-1.6.8/libraries/LiquidCrystal
-  - sudo mv arduino-1.6.8 /usr/local/share/arduino
-  - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
-  - sudo cp -Rf ArduinoAddons/Arduino_1.6.x/* /usr/local/share/arduino/
+  - cp -Rf ArduinoAddons/Arduino_1.6.x/* arduino-1.6.8/
   - wget -c "https://raw.githubusercontent.com/arduino/Arduino/master/hardware/arduino/avr/bootloaders/stk500v2/stk500boot_v2_mega2560.hex"
-  - sudo cp stk500boot_v2_mega2560.hex /usr/local/share/arduino/hardware/arduino/avr/bootloaders/stk500v2/
-  - sudo cp stk500boot_v2_mega2560.hex /usr/local/share/arduino/hardware/marlin/avr/bootloaders/
-  - sudo find /usr/local/ -name platform.local.txt -delete
+  - cp stk500boot_v2_mega2560.hex arduino-1.6.8/hardware/arduino/avr/bootloaders/stk500v2/
+  - cp stk500boot_v2_mega2560.hex arduino-1.6.8/hardware/marlin/avr/bootloaders/
+  - find arduino-1.6.8/ -name platform.local.txt -delete
   
 install:
   - cp Firmware/variants/1_75mm_MK2-RAMBo13a-E3Dv6full.h Firmware/Configuration_prusa.h
 
 script:
-  - arduino --verify --verbose-build --board marlin:avr:rambo $PWD/Firmware/Firmware.ino
+  - arduino-1.6.8/arduino --verify --verbose-build --board marlin:avr:rambo $PWD/Firmware/Firmware.ino
