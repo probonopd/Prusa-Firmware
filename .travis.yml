@@ -22,4 +22,9 @@ install:
   - cp Firmware/variants/1_75mm_MK2-RAMBo13a-E3Dv6full.h Firmware/Configuration_prusa.h
 
 script:
-  - arduino-1.6.8/arduino --verify --verbose-build --board marlin:avr:rambo $PWD/Firmware/Firmware.ino
+  - VARIANTS=$(ls Firmware/variants/)
+  - for VARIANT in $VARIANTS; do
+      arduino-1.6.8/arduino --verify --verbose-build --board marlin:avr:rambo $PWD/Firmware/Firmware.ino ;
+      find /tmp/ -name Firmware.ino.hex -exec mv {} $VARIANT.hex \;
+    done
+  - ls -lh *.hex
