@@ -18,9 +18,10 @@ before_install:
   - wget -c "https://raw.githubusercontent.com/arduino/Arduino/master/hardware/arduino/avr/bootloaders/stk500v2/stk500boot_v2_mega2560.hex"
   - sudo cp stk500boot_v2_mega2560.hex /usr/local/share/arduino/hardware/arduino/avr/bootloaders/stk500v2/
   - sudo cp stk500boot_v2_mega2560.hex /usr/local/share/arduino/hardware/marlin/avr/bootloaders/
+  - sudo find /usr/local/ -name platform.local.txt -delete
   
 install:
   - cp Firmware/variants/1_75mm_MK2-RAMBo13a-E3Dv6full.h Firmware/Configuration_prusa.h
 
 script:
-  - arduino --verify --verbose-build --board marlin:avr:RAMBo $PWD/Firmware/Firmware.ino
+  - arduino --verify --verbose-build --board marlin:avr:rambo $PWD/Firmware/Firmware.ino
