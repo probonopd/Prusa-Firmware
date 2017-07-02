@@ -14,7 +14,7 @@ before_install:
   - rm -rf arduino-1.6.8/libraries/LiquidCrystal
   - sudo mv arduino-1.6.8 /usr/local/share/arduino
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
-  - sudo cp -Rf ArduinoAddons/Arduino_1.6.x /usr/local/share/arduino/
+  - sudo cp -Rf ArduinoAddons/Arduino_1.6.x/* /usr/local/share/arduino/
   - wget -c "https://raw.githubusercontent.com/arduino/Arduino/master/hardware/arduino/avr/bootloaders/stk500v2/stk500boot_v2_mega2560.hex"
   - sudo cp stk500boot_v2_mega2560.hex /usr/local/share/arduino/hardware/arduino/avr/bootloaders/stk500v2/
   - sudo cp stk500boot_v2_mega2560.hex /usr/local/share/arduino/hardware/marlin/avr/bootloaders/
