@@ -1,0 +1,26 @@
+# Compile Firmware on Travis CI
+# By Simon Peter
+# Roughly based on https://github.com/prusa3d/Prusa-Firmware/issues/29 and
+# https://learn.adafruit.com/continuous-integration-arduino-and-you/testing-your-project
+
+language: c
+
+before_install:
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
+  - sleep 3
+  - export DISPLAY=:1.0
+  - wget http://downloads.arduino.cc/arduino-1.6.8-linux64.tar.xz
+  - tar xf arduino-1.6.8-linux64.tar.xz
+  - rm -rf arduino-1.6.8/libraries/LiquidCrystal
+  - sudo mv arduino-1.6.8 /usr/local/share/arduino
+  - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
+  - sudo cp -Rf ArduinoAddons/Arduino_1.6.x /usr/local/share/arduino/
+  - wget -c "https://raw.githubusercontent.com/arduino/Arduino/master/hardware/arduino/avr/bootloaders/stk500v2/stk500boot_v2_mega2560.hex"
+  - sudo cp stk500boot_v2_mega2560.hex /usr/local/share/arduino/hardware/arduino/avr/bootloaders/stk500v2/
+  - sudo cp stk500boot_v2_mega2560.hex /usr/local/share/arduino/hardware/marlin/avr/bootloaders/
+  
+install:
+  - cp Firmware/variants/1_75mm_MK2-RAMBo13a-E3Dv6full.h Firmware/Configuration_prusa.h
+
+script:
+  - arduino --verify --board arduino:avr:RAMBo $PWD/Firmware/Firmware.ino
