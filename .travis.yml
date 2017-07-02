@@ -25,7 +25,7 @@ script:
   - VARIANTS=$(ls Firmware/variants/)
   - for VARIANT in $VARIANTS; do
       arduino-1.6.8/arduino --pref build.path=. --verify --verbose-build --board marlin:avr:rambo $PWD/Firmware/Firmware.ino ;
-      cp Firmware.ino.hex $VARIANT.hex ;
+      cp Firmware.ino.hex $VARIANTex ;
     done
   - ls -lh *
   - mkdir -p prusa3d_fw_$(git rev-parse --short HEAD)/MK1-175mm prusa3d_fw_$(git rev-parse --short HEAD)/MK2-MultiMaterial prusa3d_fw_$(git rev-parse --short HEAD)/MK2
