@@ -23,4 +23,4 @@ install:
   - cp Firmware/variants/1_75mm_MK2-RAMBo13a-E3Dv6full.h Firmware/Configuration_prusa.h
 
 script:
-  - arduino --verify --verbose-build --board arduino:avr:RAMBo $PWD/Firmware/Firmware.ino
+  - arduino --verify --verbose-build --board marlin:avr:RAMBo $PWD/Firmware/Firmware.ino
