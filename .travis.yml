@@ -28,3 +28,8 @@ script:
       find /tmp/ -name Firmware.ino.hex -exec mv {} $VARIANT.hex \; ;
     done
   - ls -lh *.hex
+  - mkdir -p prusa3d_fw_$(git rev-parse --short HEAD)/MK1-175mm prusa3d_fw_$(git rev-parse --short HEAD)/MK2-MultiMaterial prusa3d_fw_$(git rev-parse --short HEAD)/MK2
+  - mv *_MK1-RAMBo* prusa3d_fw_$(git rev-parse --short HEAD)/MK1-175mm
+  - mv *_MK2-MultiMaterial-RAMBo* prusa3d_fw_$(git rev-parse --short HEAD)/MK2-MultiMaterial
+  - mv *_MK2-RAMBo* prusa3d_fw_$(git rev-parse --short HEAD)/MK2
+  - find prusa3d_fw_$(git rev-parse --short HEAD)/
