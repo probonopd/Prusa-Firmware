@@ -19,6 +19,7 @@ before_install:
   - find arduino-1.6.8/ -name platform.local.txt -delete
   - sed -i -e 's|SERIAL_PORT 0|SERIAL_PORT 2|g' Firmware/Configuration.h # Use Serial2 instead of Serial0 (connector P3 instead of USB)
   - sed -i -e 's|>USB|>Wireless|g' Firmware/ultralcd_implementation_hitachi_HD44780.h
+  - sed -i -e 's|SIGNAL(USART2_RX_vect)|SIGNAL(USARTB_RX_vect)|g' Firmware/MarlinSerial.cpp # https://github.com/prusa3d/Prusa-Firmware/issues/381#issuecomment-368300297
   
 install:
   - cp Firmware/variants/1_75mm_MK2-RAMBo13a-E3Dv6full.h Firmware/Configuration_prusa.h
